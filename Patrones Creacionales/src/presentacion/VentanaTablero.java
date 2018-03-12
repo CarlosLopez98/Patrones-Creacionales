@@ -7,6 +7,7 @@ package presentacion;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,16 +19,23 @@ import javax.swing.border.EmptyBorder;
  */
 public class VentanaTablero extends JFrame{
     
+    private final int PIXALTO;
+    private final int PIXANCHO;
     private final int ALTO;
     private final int ANCHO;
+    
+    private Controlador controlador;
+    private MouseEvent me;
     
     // Componentes de la ventana
     private JPanel panelPrincipal;
     private Canvas canvas;
     
     public VentanaTablero(){
-        ANCHO = 384;
-        ALTO = 512;
+        PIXALTO = 29;
+        PIXANCHO = 6;
+        ANCHO = 384 + PIXANCHO;
+        ALTO = 512 + PIXALTO;
         
         this.setSize(ANCHO, ALTO);
         
@@ -35,20 +43,11 @@ public class VentanaTablero extends JFrame{
         this.setResizable(false);
         
         this.initComponents();
-        
-        this.setVisible(true);
     }
     
     private void initComponents(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.panelPrincipal = new JPanel();
-        this.panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
-        this.setContentPane(panelPrincipal);
-        this.panelPrincipal.setLayout(null);
         
-        this.canvas = new Canvas();
-        this.canvas.setBackground(Color.blue);
-	this.canvas.setBounds(32, 0, 320, 512);
-	this.panelPrincipal.add(canvas);
+	this.add(new Dibujo());
     }
 }
