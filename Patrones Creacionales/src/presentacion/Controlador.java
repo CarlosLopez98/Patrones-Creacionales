@@ -13,7 +13,13 @@ import java.awt.event.MouseListener;
  * @author Carlos
  */
 public class Controlador implements MouseListener{
-
+    
+    public int posX,posY;
+    
+    public Controlador(){
+        
+    }
+    
     @Override
     public void mouseClicked(MouseEvent me) {
         
@@ -21,8 +27,10 @@ public class Controlador implements MouseListener{
 
     @Override
     public void mousePressed(MouseEvent me) {
-        System.out.println("Posicion X: "+me.getX());
-        System.out.println("Posicion Y: "+me.getY());
+        System.out.println("(" + me.getX() + "," + me.getY() + ")");
+        
+        posX = me.getX();
+        posY = me.getY();
     }
 
     @Override

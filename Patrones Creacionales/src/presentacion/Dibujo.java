@@ -48,11 +48,7 @@ public class Dibujo extends Canvas {
                     g.drawImage(miTablero.getTablero()[y][x].imagen.getImage(), x*32, y*32, 32, 32, null);
                 }
             }
-        }
-        
-        
-        
+        }       
     }
-    
-    
+
 }

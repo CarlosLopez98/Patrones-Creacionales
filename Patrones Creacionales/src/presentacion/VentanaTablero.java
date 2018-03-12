@@ -26,6 +26,8 @@ public class VentanaTablero extends JFrame{
     
     private Controlador controlador;
     private MouseEvent me;
+    private Dibujo miDibujo;
+    private Controlador miControl;
     
     // Componentes de la ventana
     private JPanel panelPrincipal;
@@ -36,6 +38,9 @@ public class VentanaTablero extends JFrame{
         PIXANCHO = 6;
         ANCHO = 384 + PIXANCHO;
         ALTO = 512 + PIXALTO;
+        
+        miDibujo = new Dibujo();
+        miControl = new Controlador();
         
         this.setSize(ANCHO, ALTO);
         
@@ -48,6 +53,13 @@ public class VentanaTablero extends JFrame{
     private void initComponents(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-	this.add(new Dibujo());
+	this.add(miDibujo);
+        
+        capturarEventos();
+        System.out.println("(" + miControl.posX + "," + miControl.posY + ")");
+    }
+    
+    private void capturarEventos() {
+	miDibujo.addMouseListener(miControl);
     }
 }
