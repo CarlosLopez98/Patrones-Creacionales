@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferStrategy;
 import javax.swing.ImageIcon;
 import logica.Tablero;
 import logica.Torre;
@@ -21,23 +22,37 @@ import logica.Torre;
  */
 public class Dibujo extends Canvas {
     
-    private static int APS = 0;
-    private static int FPS = 0;
+    private BufferStrategy buffer;
+    private Graphics g;
     
     public Tablero miTablero;
+    public Controlador miControl;
     private ImageIcon grass;
     
-    public Dibujo(){
-        miTablero = new Tablero();
+    public Dibujo(int ancho, int alto){
+        this.setSize(ancho, alto);
+        setFocusable(true);
         
+        g = (Graphics2D)g;
+        miTablero = new Tablero();
+        miControl = new Controlador(this);
         grass = new ImageIcon(getClass().getResource("/img/Grass.png"));
         
+        capturarEventos();
     }
     
-    @Override
-    public void paint(Graphics g) {
+    public void dibujar() {
+        this.buffer = getBufferStrategy();
         
-        g = (Graphics2D) g;
+        if(this.buffer == null){
+            createBufferStrategy(2);
+            return;
+        }
+        
+        this.g = buffer.getDrawGraphics();
+        
+        
+        // DIbujar aqui
         g.setColor(Color.black);
         
         for(int y=0; y<16; y++){
@@ -54,6 +69,12 @@ public class Dibujo extends Canvas {
                 }
             }
         }
+
+        this.g.dispose();
+        this.buffer.show();
     }
     
+    public void capturarEventos(){
+        this.addMouseListener(miControl);
+    }
 }
