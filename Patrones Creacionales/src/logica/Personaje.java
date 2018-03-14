@@ -5,19 +5,23 @@
  */
 package logica;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Carlos
  */
 public abstract class Personaje implements Cloneable{
     
-    //Sprite
-    private int vida;
-    private String arma;
-    private String escudo;
+    protected ImageIcon[] sprites;
+    protected int vida;
+    protected int ataque;
+    protected int velocidad;
+    protected String arma;
+    protected String escudo;
+    
     
     public abstract void moverse();
     public abstract void atacar();
-    public abstract void defender(); 
-    
+    public abstract void defender();
 }

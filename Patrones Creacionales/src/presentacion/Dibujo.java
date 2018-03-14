@@ -13,8 +13,9 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import javax.swing.ImageIcon;
+import logica.Agente;
+import logica.Duende;
 import logica.Tablero;
-import logica.Torre;
 
 /**
  *
@@ -27,7 +28,11 @@ public class Dibujo extends Canvas {
     
     public Tablero miTablero;
     public Controlador miControl;
+    public Agente miAgente;
+    public Duende miDuende;
     private ImageIcon grass;
+    private ImageIcon muro1,muro2;
+    private ImageIcon valla;
     
     public Dibujo(int ancho, int alto){
         this.setSize(ancho, alto);
@@ -36,7 +41,14 @@ public class Dibujo extends Canvas {
         g = (Graphics2D)g;
         miTablero = new Tablero();
         miControl = new Controlador(this);
+        
+        miAgente = new Agente();
+        miDuende = new Duende();
+        
         grass = new ImageIcon(getClass().getResource("/img/Grass.png"));
+        muro1 = new ImageIcon(getClass().getResource("/img/muro1.png"));
+        muro2 = new ImageIcon(getClass().getResource("/img/muro2.png"));
+        valla = new ImageIcon(getClass().getResource("/img/valla.png"));
         
         capturarEventos();
     }
@@ -62,10 +74,28 @@ public class Dibujo extends Canvas {
                 g.setFont(new Font("Arial",Font.PLAIN,10));
                 g.drawString(x+","+y,x*32,(y+1)*32);
                 
-                if(miTablero.getTablero()[y][x] == null){
-                    g.drawImage(grass.getImage(), x*32, y*32, 32, 32, null);
-                }else{
-                    g.drawImage(miTablero.getTablero()[y][x].imagen.getImage(), x*32, y*32, 32, 32, null);
+                /* PRUEBA DE MATRIZ */
+                switch(miTablero.getTablero()[y][x]){
+                    case 0:
+                        g.drawImage(grass.getImage(),x*32, y*32, 32, 32, null);
+                        break;
+                    case 1:
+                        g.drawImage(muro1.getImage(), x*32, y*32, 32, 32, null);
+                        break;
+                    case 2:
+                        g.drawImage(muro2.getImage(), x*32, y*32, 32, 32, null);
+                        break;
+                    case 3:
+                        g.drawImage(valla.getImage(), x*32, y*32, 32, 32, null);
+                        break;
+                }
+                
+
+                /* CAPTURA DE LA POSICION DEL MOUSE EN LA CLASE CONTROLADOR */
+                if(miControl.boton == 1){
+                    miTablero.setObject(3, miControl.posX, miControl.posY);
+                    System.err.println("(" + miControl.posX + "," + miControl.posY + ")");
+                    miControl.boton = 0;
                 }
             }
         }

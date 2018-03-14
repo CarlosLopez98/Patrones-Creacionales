@@ -7,7 +7,6 @@ package presentacion;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import logica.Valla;
 
 /**
  *
@@ -47,8 +46,8 @@ public class Controlador implements MouseListener{
             }
         }
         if(boton == 1){
-            miDibujo.miTablero.setObject(new Valla(), posX, posY);
-            System.out.println("(" + posX + "," + posY + ")");
+//            miDibujo.miTablero.setObject(new Valla(), posX, posY);
+//            System.out.println("(" + posX + "," + posY + ")");
         }
         
     }
