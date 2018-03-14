@@ -10,10 +10,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferStrategy;
 import javax.swing.ImageIcon;
 import logica.Agente;
+import logica.CreadorPersonaje;
 import logica.Duende;
 import logica.Tablero;
 
@@ -28,11 +28,11 @@ public class Dibujo extends Canvas {
     
     public Tablero miTablero;
     public Controlador miControl;
-    public Agente miAgente;
-    public Duende miDuende;
-    private ImageIcon grass;
-    private ImageIcon muro1,muro2;
-    private ImageIcon valla;
+    public CreadorPersonaje creador;
+    private final ImageIcon grass;
+    private final ImageIcon muro1;
+    private final ImageIcon muro2;
+    private final ImageIcon valla;
     
     public Dibujo(int ancho, int alto){
         this.setSize(ancho, alto);
@@ -42,8 +42,7 @@ public class Dibujo extends Canvas {
         miTablero = new Tablero();
         miControl = new Controlador(this);
         
-        miAgente = new Agente();
-        miDuende = new Duende();
+        creador = new CreadorPersonaje();
         
         grass = new ImageIcon(getClass().getResource("/img/Grass.png"));
         muro1 = new ImageIcon(getClass().getResource("/img/muro1.png"));
@@ -67,12 +66,14 @@ public class Dibujo extends Canvas {
         // DIbujar aqui
         g.setColor(Color.black);
         
+        
+        /* DIBUJO DEL TABLERO PRINCIPAL */
         for(int y=0; y<16; y++){
             for(int x=0; x<12; x++){
                 // Matriz guia
-                g.drawRect(x*32, y*32, 32, 32);
-                g.setFont(new Font("Arial",Font.PLAIN,10));
-                g.drawString(x+","+y,x*32,(y+1)*32);
+//                g.drawRect(x*32, y*32, 32, 32);
+//                g.setFont(new Font("Arial",Font.PLAIN,10));
+//                g.drawString(x+","+y,x*32,(y+1)*32);
                 
                 /* PRUEBA DE MATRIZ */
                 switch(miTablero.getTablero()[y][x]){
@@ -89,15 +90,28 @@ public class Dibujo extends Canvas {
                         g.drawImage(valla.getImage(), x*32, y*32, 32, 32, null);
                         break;
                 }
-                
-
-                /* CAPTURA DE LA POSICION DEL MOUSE EN LA CLASE CONTROLADOR */
-                if(miControl.boton == 1){
-                    miTablero.setObject(3, miControl.posX, miControl.posY);
-                    System.err.println("(" + miControl.posX + "," + miControl.posY + ")");
-                    miControl.boton = 0;
+            }
+        }
+        
+        /* DIBUJO DE LOS PERSONAJES */
+        for(int y=0; y<16; y++){
+            for(int x=0; x<12; x++){
+                if(miTablero.getPersonajes()[y][x] != null){
+                    g.drawImage(miTablero.getPersonajes()[y][x].sprites[0].getImage(), x*32, y*32, 32, 32, null);
+                }else{
+                    g.drawRect(x*32, y*32, 32, 32);
                 }
             }
+        }
+        
+        /* CAPTURA DE LA POSICION DEL MOUSE EN LA CLASE CONTROLADOR */
+        if(miControl.boton == 1){
+            miTablero.setPersonaje(creador.retrieveAnimal("Agente"), miControl.posX, miControl.posY);
+            System.err.println("(" + miControl.posX + "," + miControl.posY + ")");
+            miControl.boton = 0;
+        }else if(miControl.boton == 3){
+            miTablero.setPersonaje(null, miControl.posX, miControl.posY);
+            miControl.boton = 0;
         }
 
         this.g.dispose();

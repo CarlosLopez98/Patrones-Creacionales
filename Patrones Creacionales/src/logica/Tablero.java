@@ -10,13 +10,15 @@ package logica;
  * @author Carlos
  */
 public class Tablero {
-    private static int ALTO = 16;
-    private static int ANCHO = 12;
+    private static final int ALTO = 16;
+    private static final int ANCHO = 12;
     
-    private int[][] tablero;
+    private final int[][] tablero;
+    private final Personaje[][] personajes;
     
     public Tablero(){
         tablero = new int[ALTO][ANCHO];
+        personajes = new Personaje[ALTO][ANCHO];
         /*
             elementos de la matriz
             
@@ -24,9 +26,6 @@ public class Tablero {
             1 = muro1
             2 = muro2
             3 = valla
-            
-            4 = Agente
-            5 = Duende
         */
         for(int y=0; y<16; y++){
             for(int x=0; x<12; x++){
@@ -39,6 +38,8 @@ public class Tablero {
                 }else{ 
                     tablero[y][x] = 0;
                 }
+                
+                personajes[y][x] = null;
             }
         }
     }
@@ -53,9 +54,24 @@ public class Tablero {
         }    
     }
     
+    public void setPersonaje(Personaje p, int posX, int posY){
+        if(tablero[posY][posX] == 0){
+            tablero[posY][posX] = 4;
+            personajes[posY][posX] = p;
+        }
+        if(tablero[posY][posX] == 4){
+            tablero[posY][posX] = 0;
+            personajes[posY][posX] = p;
+        }
+    }
+    
     /* PRUEBA -- retorno de la matriz como Objeto */
     public int[][] getTablero(){
         return tablero;
+    }
+    
+    public Personaje[][] getPersonajes(){
+        return personajes;
     }
     
     public void imprimir(){

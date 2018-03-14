@@ -31,6 +31,8 @@ public class Controlador implements MouseListener{
         
         if(me.getButton() == MouseEvent.BUTTON1){
             boton = 1;
+        }else if(me.getButton() == MouseEvent.BUTTON3){
+            boton = 3;
         }else{
             boton = 0;
         }
