@@ -11,9 +11,9 @@ import javax.swing.ImageIcon;
  *
  * @author Carlos
  */
-public class Torre extends Objeto{
+public class Valla extends Objeto{
     
-    public Torre(){
-        imagen = new ImageIcon(getClass().getResource("/img/torre1.png"));
+    public Valla(){
+        imagen = new ImageIcon(getClass().getResource("/img/valla.png"));
     }
 }

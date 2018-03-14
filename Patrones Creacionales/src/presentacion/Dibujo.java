@@ -21,17 +21,22 @@ import logica.Torre;
  */
 public class Dibujo extends Canvas {
     
-    private Tablero miTablero;
+    private static int APS = 0;
+    private static int FPS = 0;
+    
+    public Tablero miTablero;
     private ImageIcon grass;
     
     public Dibujo(){
         miTablero = new Tablero();
         
-        grass = new ImageIcon(getClass().getResource("/img/grass.png"));
+        grass = new ImageIcon(getClass().getResource("/img/Grass.png"));
+        
     }
-
+    
     @Override
     public void paint(Graphics g) {
+        
         g = (Graphics2D) g;
         g.setColor(Color.black);
         
@@ -48,7 +53,7 @@ public class Dibujo extends Canvas {
                     g.drawImage(miTablero.getTablero()[y][x].imagen.getImage(), x*32, y*32, 32, 32, null);
                 }
             }
-        }       
+        }
     }
-
+    
 }

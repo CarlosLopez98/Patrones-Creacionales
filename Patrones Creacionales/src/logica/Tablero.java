@@ -20,8 +20,12 @@ public class Tablero {
         for(int y=0; y<16; y++){
             for(int x=0; x<12; x++){
                 
-                if(x==0 || x==11 || y==0 || y==15){
-                    tablero[y][x] = new Torre();
+                if(y == 0){
+                    tablero[y][x] = new Muro(1);
+                }else if(y == 15){
+                    tablero[y][x] = new Muro(2);
+                }else if(x == 0 || x == 11){
+                    tablero[y][x] = new Valla();
                 }else{ 
                     tablero[y][x] = null;
                 }
@@ -29,11 +33,26 @@ public class Tablero {
         }
     }
     
+    private boolean verificarTablero(int posX, int posY){
+        return tablero[posY][posX] == null;
+    }
+    
     public void setObject(Objeto o, int posX, int posY){
-        tablero[posY][posX] = o;
+        if(verificarTablero(posX,posY)){
+            tablero[posY][posX] = o;
+        }    
     }
     
     public Objeto[][] getTablero(){
         return tablero;
-    } 
+    }
+    
+    public void imprimir(){
+        for(int y=0; y<16; y++){
+            for(int x=0; x<12; x++){
+                System.out.print(tablero[y][x]+" ");
+            }
+            System.out.println();
+        }
+    }
 }

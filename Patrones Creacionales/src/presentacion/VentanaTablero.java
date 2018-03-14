@@ -40,7 +40,7 @@ public class VentanaTablero extends JFrame{
         ALTO = 512 + PIXALTO;
         
         miDibujo = new Dibujo();
-        miControl = new Controlador();
+        miControl = new Controlador(miDibujo);
         
         this.setSize(ANCHO, ALTO);
         
@@ -56,7 +56,7 @@ public class VentanaTablero extends JFrame{
 	this.add(miDibujo);
         
         capturarEventos();
-        System.out.println("(" + miControl.posX + "," + miControl.posY + ")");
+        
     }
     
     private void capturarEventos() {

@@ -9,7 +9,7 @@ package logica;
  *
  * @author Carlos
  */
-public class Orco extends Personaje{
+public class Duende extends Personaje{
 
     @Override
     public void moverse() {
