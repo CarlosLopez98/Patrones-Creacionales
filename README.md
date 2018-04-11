@@ -9,5 +9,6 @@ Primero se hará introducción de una “economía”, iniciamos con un oro pred
 
 Una vez empiece la batalla colocaremos nuestras tropas en una línea, estas se irán abriendo camino al objetivo, nuestro rival usara el “Counter” más apropiado para la primera tropa que este en fila si tiene suficiente oro para costearla, en caso contrario puede jugar la tropa que tenga igual o menos posibilidades para vencerla pero igual causando daño a la tropa atacante, el objetivo es llegar al final de la linea y destruir el objetivo, no debemos olvidar que nuestro rival puede atacar por la segunda línea y tener un camino directo a la victoria, por esto es importante jugar las tropas adecuadas tanto en defensa como en ataque, cuida el oro y tu objetivo, mientras mejor cumplas esta regla más posibilidades hay de ganar.
 
-### Diagrama de clases Patrones: Protoype, "Singleton" Y FACTORY METHOD  Juego
+
+### Diagrama de clases Patrones: Protoype, "Singleton" Y Factory Method.
 ![DiagramaJuego.png](https://github.com/CarlosLopez98/Patrones-Creacionales/blob/master/DiagramaJuego.png)
